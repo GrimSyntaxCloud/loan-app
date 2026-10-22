@@ -1,27 +1,26 @@
-<mat-toolbar class="toolbar primary-background-color ">
-  <mat-toolbar-row>
-    <div class="logo">
-     <img src="./assets/logo/Circle-Bird.svg" alt="logo" height="80">
-    </div>
-    <div style="width: 80%">
-      <div fxLayout="row wrap" fxLayoutAlign="end start">
-        <button mat-button routerLink="/home">Home</button>
-        <button mat-button routerLink="/about">About</button>
-        <button mat-button routerLink="/contact">Contact</button>
-
-      </div>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<br>
-<div fxLayout="row wrap">
-  <div fxFlex>
-    <mat-card class="main-container">
-      <br><br>
-      <mat-card-content>
-        <router-outlet></router-outlet>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+<a class="skip-link" href="#main">Skip to calculator</a>
+<header class="site-header">
+  <a routerLink="/" class="brand" aria-label="Loan Calculator home"
+    ><span class="brand-mark" aria-hidden="true">↗</span
+    ><span>LOAN<span class="brand-light"> / CALCULATOR</span></span></a
+  >
+  <nav aria-label="Main navigation">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Calculator</a
+    >
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  </nav>
+  <span class="header-note"><i></i> A clearer view of borrowing</span>
+</header>
+<main id="main" tabindex="-1"><router-outlet></router-outlet></main>
+<footer class="site-footer">
+  <span
+    >LOAN CALCULATOR <span class="footer-divider">/</span> BY ANDRES
+    MACIAS</span
+  ><span>Fixed rate. Clear numbers. No guesswork.</span
+  ><span>EDUCATIONAL DEMO · EST. 2022</span>
+</footer>
