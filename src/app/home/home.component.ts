@@ -1,20 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 
 @Component({
   standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   loanForm: FormGroup;
-  errorMessage: string;
-  monthlyPayment: number = 0;
-  interest: number = 0;
+  errorMessage = '';
+  monthlyPayment = 0;
+  interest = 0;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loanForm = this.fb.group({
@@ -24,28 +23,44 @@ export class HomeComponent implements OnInit {
     });
   }
 
- onSubmit() {
-  const formValues = this.loanForm.value;
-  const loanAmount = parseInt(formValues.loanAmount);
-  const interest = parseFloat(formValues.interestRate);
-  const years = parseInt(formValues.years);
+  onSubmit() {
+    const numeric = (value: unknown) =>
+      typeof value === 'string' && value.trim() !== '' ? Number(value) : NaN;
+    const values = this.loanForm.value;
+    const loanAmount = numeric(values.loanAmount);
+    const annualRate = numeric(values.interestRate);
+    const years = numeric(values.years);
+    const months = years * 12;
+    this.monthlyPayment = 0;
+    this.interest = 0;
+    this.errorMessage = '';
 
-  const numOfMonths = years * 12;
-  const monthlyInterest = interest / 100 / 12;
+    if (!Number.isFinite(loanAmount) || loanAmount <= 0 ||
+        !Number.isFinite(annualRate) || annualRate < 0 ||
+        !Number.isInteger(years) || years < 1 || !Number.isSafeInteger(months)) {
+      this.errorMessage = 'Enter a positive loan amount, a non-negative interest rate, and a whole number of years.';
+      return;
+    }
 
+    const monthlyRate = annualRate / 100 / 12;
+    // log1p/expm1 retain precision for rates close to zero; zero has no interest.
+    const payment = monthlyRate === 0
+      ? loanAmount / months
+      : loanAmount * monthlyRate / -Math.expm1(-months * Math.log1p(monthlyRate));
+    const rounded = Number(payment.toFixed(2));
+    const totalInterest = monthlyRate === 0 ? 0 : Math.max(0, rounded * months - loanAmount);
+    if (!Number.isFinite(rounded) || !Number.isFinite(totalInterest)) {
+      this.errorMessage = 'These values are too large to calculate. Please use smaller values.';
+      return;
+    }
+    this.monthlyPayment = rounded;
+    this.interest = totalInterest;
+  }
 
-  this.monthlyPayment = (loanAmount *(monthlyInterest * Math.pow(monthlyInterest + 1, numOfMonths))) /
-    (Math.pow(1 + monthlyInterest, numOfMonths) - 1);
-
-  this.monthlyPayment = parseFloat(this.monthlyPayment.toFixed(2));
-
-  this.interest = this.monthlyPayment * numOfMonths - loanAmount;
-}
-
-clearForm() {
-  this.monthlyPayment = 0;
-  this.interest = 0;
-  this.loanForm.reset();
-}
-
+  clearForm() {
+    this.monthlyPayment = 0;
+    this.interest = 0;
+    this.errorMessage = '';
+    this.loanForm.reset();
+  }
 }
