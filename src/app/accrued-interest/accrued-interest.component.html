@@ -1,10 +1,2 @@
-<div>
-    <div>
-      Interest paid:
-    </div>
-    <br>
-    <div class="large-font bronze">
-      {{ "$" + (accruedInterest | number:'0.00') }}
-    </div>
-  </div>
-  <br /><br />
+<span>Total interest</span
+><strong>{{ accruedInterest | currency: "USD" : "symbol" : "1.2-2" }}</strong>

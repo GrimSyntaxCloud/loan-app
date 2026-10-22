@@ -1,49 +1,186 @@
-<h1 class="align-center">Loan Application</h1>
-<div class="background-bird" fxLayout="row wrap" fxLayoutGap="20px">
-    <div class="loan-form" fxFlex>
-      <mat-card>
-        <mat-card-title>Calculate Loan</mat-card-title>
-
-        <mat-card-content>
-          <form fxLayout="column" fxLayoutGap="16px" [formGroup]="loanForm" (ngSubmit)="onSubmit();">
-
-
-            <mat-form-field fxFlex appearance="fill">
-             <mat-label>Loan Amount:</mat-label> <br>
-              <input type="text" name="loanAmount" required id="txtLoanAmount" matInput formControlName="loanAmount"/>
-            </mat-form-field>
-
-            <mat-form-field fxFlex appearance="fill">
-              <mat-label>Interest Rate:</mat-label> <br>
-              <input type="text" name="interestRate" required id="txtInterestRate" matInput formControlName="interestRate"/>
-            </mat-form-field>
-
-            <mat-form-field fxFlex appearance="fill">
-                <mat-label>Years:</mat-label> <br>
-                <input type="text" name="years" required id="years" matInput formControlName="years"/>
-                </mat-form-field>
-
-              <p *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
-
-              <div class="btn-group">
-                <button class="margin-right btn btn-outline-primary">Submit</button>
-                <button type="button" class="btn btn-color-primary" (click)="clearForm()">Reset</button>
-              </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
+<section class="page-heading">
+  <div>
+    <span class="eyebrow">01 / THE BORROWING WORKBENCH</span>
+    <h1>Know the numbers.<br />See the whole picture.</h1>
+  </div>
+  <p>
+    A loan is more than a monthly payment.<br />Explore the cost, the interest,
+    and the way down to zero.
+  </p>
+</section>
+<section class="workbench" aria-label="Loan calculator">
+  <div class="input-panel">
+    <div class="panel-heading">
+      <span class="eyebrow">YOUR PARAMETERS</span
+      ><span aria-hidden="true">↘</span>
     </div>
-
-    <div class="results-summary" fxFlex>
-      <mat-card class="mat-elevation-z8">
-        <mat-card-title>Results:</mat-card-title>
-        <br>
-        <mat-card-content>
-          <app-payments [payments]="monthlyPayment"></app-payments>
-            <app-accrued-interest [accruedInterest]="interest"></app-accrued-interest>
-        </mat-card-content>
-      </mat-card>
-
+    <form [formGroup]="loanForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="field-number">01 <span>Start with your amount</span></div>
+      <mat-form-field appearance="outline"
+        ><mat-label>Loan amount ($)</mat-label
+        ><input
+          matInput
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          name="loanAmount"
+          required
+          id="txtLoanAmount"
+          formControlName="loanAmount"
+          placeholder="25000"
+      /></mat-form-field>
+      <div class="field-number">02 <span>Set the annual rate</span></div>
+      <mat-form-field appearance="outline"
+        ><mat-label>Annual interest rate (%)</mat-label
+        ><input
+          matInput
+          type="text"
+          inputmode="decimal"
+          autocomplete="off"
+          name="interestRate"
+          required
+          id="txtInterestRate"
+          formControlName="interestRate"
+          placeholder="6.5"
+      /></mat-form-field>
+      <div class="field-number">03 <span>Choose your timeline</span></div>
+      <mat-form-field appearance="outline"
+        ><mat-label>Term (whole years)</mat-label
+        ><input
+          matInput
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          name="years"
+          required
+          id="years"
+          formControlName="years"
+          placeholder="5"
+      /></mat-form-field>
+      <p *ngIf="errorMessage" class="error" role="alert">{{ errorMessage }}</p>
+      <button type="submit" class="calculate">
+        Calculate loan <span aria-hidden="true">↗</span>
+      </button>
+      <button
+        type="button"
+        class="reset btn-color-primary"
+        (click)="clearForm()"
+      >
+        Reset parameters <span aria-hidden="true">↺</span>
+      </button>
+    </form>
+    <p class="privacy">
+      <span aria-hidden="true">◈</span> Just you and the numbers.<br /><span
+        >Nothing is stored or sent.</span
+      >
+    </p>
+  </div>
+  <div class="output-panel" [class.calculated]="hasResult">
+    <div class="output-top">
+      <span class="eyebrow">YOUR LOAN, AT A GLANCE</span
+      ><span class="status"
+        ><i></i>{{ hasResult ? "ESTIMATE READY" : "AWAITING INPUT" }}</span
+      >
+    </div>
+    <div class="payment-display" aria-live="polite" aria-atomic="true">
+      <app-payments *ngIf="hasResult" [payments]="monthlyPayment"></app-payments
+      ><ng-container *ngIf="!hasResult"
+        ><p class="metric-label">Estimated monthly payment</p>
+        <div class="empty-payment">
+          $<span>—</span><small>/ mo</small>
+        </div></ng-container
+      >
+      <p class="payment-note">
+        {{
+          hasResult
+            ? "A fixed payment. A clearer plan."
+            : "Enter your details to bring your loan into focus."
+        }}
+      </p>
+    </div>
+    <div class="totals">
+      <div>
+        <span>Principal</span
+        ><strong>{{
+          hasResult ? (principal | currency: "USD" : "symbol" : "1.2-2") : "—"
+        }}</strong>
+      </div>
+      <div>
+        <app-accrued-interest
+          *ngIf="hasResult"
+          [accruedInterest]="interest"
+        ></app-accrued-interest
+        ><ng-container *ngIf="!hasResult"
+          ><span>Total interest</span><strong>—</strong></ng-container
+        >
+      </div>
+      <div>
+        <span>Total repayment</span
+        ><strong>{{
+          hasResult
+            ? (principal + interest | currency: "USD" : "symbol" : "1.2-2")
+            : "—"
+        }}</strong>
+      </div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-title">
+        <h2>The path to paid off</h2>
+        <span>REMAINING PRINCIPAL</span>
+      </div>
+      <div class="chart" [class.empty-chart]="!hasResult">
+        <svg
+          viewBox="0 0 600 180"
+          preserveAspectRatio="none"
+          role="img"
+          [attr.aria-label]="
+            hasResult
+              ? 'Remaining loan principal falls from ' +
+                principal +
+                ' dollars to zero over ' +
+                termYears +
+                ' years.'
+              : 'Your balance chart will appear after calculating.'
+          "
+        >
+          <defs>
+            <linearGradient id="balance-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a8e5e9" stop-opacity=".28" />
+              <stop offset="100%" stop-color="#a8e5e9" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g class="grid-lines">
+            <path
+              d="M0 15H600 M0 55H600 M0 95H600 M0 135H600 M0 175H600 M100 15V175 M200 15V175 M300 15V175 M400 15V175 M500 15V175"
+            />
+          </g>
+          <ng-container *ngIf="hasResult">
+            <path
+              class="chart-fill"
+              [attr.d]="areaPath"
+              fill="url(#balance-fill)"
+            />
+            <path class="chart-line" [attr.d]="balancePath" />
+            <circle cx="600" cy="175" r="4" fill="#a8e5e9" />
+          </ng-container></svg
+        ><span *ngIf="!hasResult" class="chart-placeholder"
+          >Your future balance, visualized.</span
+        >
+      </div>
+      <div class="chart-axis">
+        <span>{{ hasResult ? "YEAR 0" : "START" }}</span
+        ><span>{{
+          hasResult ? "YEAR " + termYears + " / PAID OFF" : "FINISH"
+        }}</span>
+      </div>
     </div>
   </div>
-
+</section>
+<div class="method-note">
+  <span class="eyebrow">THE FINE PRINT, MADE SIMPLE</span>
+  <p>
+    Fixed annual rate. Monthly payments. No fees, taxes, or insurance. An
+    educational estimate, not a loan offer. The curve uses the unrounded
+    amortization schedule; displayed payments are rounded to cents.
+  </p>
+</div>

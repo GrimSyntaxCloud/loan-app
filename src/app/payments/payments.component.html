@@ -1,10 +1,4 @@
-<div>
-    <div>
-      Your monthly payment:
-    </div>
-    <br>
-    <div class="large-font bronze">
-      {{ "$" + (payments | number:'0.00') }}
-    </div>
-  </div>
-  <br /><br />
+<p class="metric-label">Estimated monthly payment</p>
+<div class="payment">
+  {{ payments | currency: "USD" : "symbol" : "1.2-2" }}<small>/ mo</small>
+</div>

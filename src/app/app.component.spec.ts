@@ -1,6 +1,5 @@
 import { AppModule } from './app.module';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -16,11 +15,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('mat-toolbar').textContent).toContain('Home');
+    expect(compiled.querySelector('nav').textContent).toContain('Calculator');
   });
 });
