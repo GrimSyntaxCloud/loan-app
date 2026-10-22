@@ -11,20 +11,19 @@
             <mat-form-field fxFlex appearance="fill">
              <mat-label>Loan Amount:</mat-label> <br>
               <input type="text" name="loanAmount" required id="txtLoanAmount" matInput formControlName="loanAmount"/>
-              <span id="txtLoanAmountError"></span>
             </mat-form-field>
 
             <mat-form-field fxFlex appearance="fill">
               <mat-label>Interest Rate:</mat-label> <br>
               <input type="text" name="interestRate" required id="txtInterestRate" matInput formControlName="interestRate"/>
-              <span id="txtLoanAmountError"></span>
             </mat-form-field>
 
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Years:</mat-label> <br>
                 <input type="text" name="years" required id="years" matInput formControlName="years"/>
-                <span id="txtLoanAmountError"></span>
-              </mat-form-field>
+                </mat-form-field>
+
+              <p *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
 
               <div class="btn-group">
                 <button class="margin-right btn btn-outline-primary">Submit</button>
