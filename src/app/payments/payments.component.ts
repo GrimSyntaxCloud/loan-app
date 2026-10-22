@@ -1,13 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   standalone: false,
   selector: 'app-payments',
   templateUrl: './payments.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./payments.component.css']
 })
 export class PaymentsComponent implements OnInit {
-  @Input() payments: number;
+  @Input() payments = 0;
 
 
   constructor() { }

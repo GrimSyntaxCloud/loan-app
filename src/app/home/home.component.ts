@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  loanForm: FormGroup;
+  loanForm!: FormGroup;
   @ViewChild(FormGroupDirective) formDirective?: FormGroupDirective;
   errorMessage = '';
   monthlyPayment = 0;
