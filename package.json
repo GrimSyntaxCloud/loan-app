@@ -5,46 +5,40 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build:pages": "ng build --base-href /loan-app/",
+    "test": "ng test --watch=false"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~10.2.5",
-    "@angular/cdk": "^10.2.7",
-    "@angular/common": "~10.2.5",
-    "@angular/compiler": "~10.2.5",
-    "@angular/core": "~10.2.5",
-    "@angular/flex-layout": "^9.0.0-beta.29",
-    "@angular/forms": "~10.2.5",
-    "@angular/material": "^10.2.7",
-    "@angular/platform-browser": "~10.2.5",
-    "@angular/platform-browser-dynamic": "~10.2.5",
-    "@angular/router": "~10.2.5",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "@angular/animations": "21.2.25",
+    "@angular/cdk": "21.2.14",
+    "@angular/common": "21.2.25",
+    "@angular/compiler": "21.2.25",
+    "@angular/core": "21.2.25",
+    "@angular/forms": "21.2.25",
+    "@angular/material": "21.2.14",
+    "@angular/platform-browser": "21.2.25",
+    "@angular/platform-browser-dynamic": "21.2.25",
+    "@angular/router": "21.2.25",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1",
+    "zone.js": "0.16.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1002.4",
-    "@angular/cli": "~10.2.4",
-    "@angular/compiler-cli": "~10.2.5",
-    "@types/jasmine": "~3.5.0",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
-    "angular-cli-ghpages": "^1.0.5",
-    "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.0.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.5.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "@angular/build": "21.2.27",
+    "@angular/cli": "21.2.27",
+    "@angular/compiler-cli": "21.2.25",
+    "typescript": "5.9.3",
+    "vitest": "^4.0.8",
+    "jsdom": "^27.0.0"
+  },
+  "overrides": {
+    "@angular/cli": {
+      "@modelcontextprotocol/sdk": "1.32.1"
+    },
+    "vite": "7.3.7"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

@@ -1,4 +1,4 @@
-@import "./theme";
+@use "./theme";
 
 html,
 body {
@@ -57,3 +57,19 @@ body {
 .mat-button:hover {
   background-color: #946B2D;
 }
+
+[fxLayout="row wrap"] { display: flex; flex-wrap: wrap; }
+[fxLayout="column"] { display: flex; flex-direction: column; }
+[fxLayoutGap="20px"] { gap: 20px; }
+[fxLayoutGap="16px"] { gap: 16px; }
+[fxLayoutAlign="end start"] { justify-content: flex-end; align-items: flex-start; }
+[fxFlex] { flex: 1 1 0%; min-width: 0; }
+.mat-mdc-card { padding: 16px; background: white; border-radius: 4px; }
+.mat-mdc-card-title { font-size: 24px; font-weight: 500; margin-bottom: 8px; }
+.mat-mdc-card-content { padding: 0; }
+.mat-mdc-card-content:first-child { padding-top: 0; }
+.mat-mdc-card-content:last-child { padding-bottom: 0; }
+.toolbar .mat-mdc-button { color: inherit; }
+.mat-mdc-button:hover { background-color: #946B2D; }
+
+.mat-toolbar.primary-background-color { color: white; }

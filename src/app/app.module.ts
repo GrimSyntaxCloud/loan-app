@@ -18,7 +18,6 @@ import { PaymentsComponent } from './payments/payments.component';
 import { AccruedInterestComponent } from './accrued-interest/accrued-interest.component';
 
 import { MatToolbarModule} from '@angular/material/toolbar';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -48,7 +47,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatButtonModule,
     MatListModule,
-    FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
