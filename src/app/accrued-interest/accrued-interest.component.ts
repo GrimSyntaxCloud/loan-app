@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-accrued-interest',
   templateUrl: './accrued-interest.component.html',
   styleUrls: ['./accrued-interest.component.css']

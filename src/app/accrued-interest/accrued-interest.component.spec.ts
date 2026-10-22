@@ -1,3 +1,4 @@
+import { AppModule } from '../app.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccruedInterestComponent } from './accrued-interest.component';
@@ -8,7 +9,7 @@ describe('AccruedInterestComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AccruedInterestComponent ]
+      imports: [AppModule]
     })
     .compileComponents();
   });
