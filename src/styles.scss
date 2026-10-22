@@ -69,7 +69,7 @@ body {
 .mat-mdc-card-content { padding: 0; }
 .mat-mdc-card-content:first-child { padding-top: 0; }
 .mat-mdc-card-content:last-child { padding-bottom: 0; }
-.toolbar .mat-mdc-button { color: inherit; }
+.toolbar .mat-mdc-button:not(:disabled) { color: white; }
 .mat-mdc-button:hover { background-color: #946B2D; }
 
 .mat-toolbar.primary-background-color { color: white; }
