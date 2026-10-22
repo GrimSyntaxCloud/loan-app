@@ -10,6 +10,8 @@ The calculation runs entirely in the browser. It uses a fixed-rate amortization 
 
 Use Node.js 22 LTS and run `npm ci`, then `npm start`. Run `npm test` for component and calculation/reset regression checks. `npm run build:pages` creates the GitHub Pages build in `dist/loan-app/browser`.
 
+The original coursework is by Andres Macias. The 2026 redesign was developed collaboratively by Andres and an AI coding assistant, with the calculation behavior checked against regression tests.
+
 ## How it works
 
 Angular reactive forms validate a positive principal, a non-negative annual rate, and a whole-year term. Monthly payments use the fixed-rate amortization formula, including a zero-interest case; displayed payments are rounded to cents. Interest keeps the existing calculation based on the rounded payment. The chart samples the exact unrounded balance at 61 evenly spaced points and uses a numerically stable remaining-term formula.
