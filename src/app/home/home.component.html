@@ -12,7 +12,7 @@
   <div class="input-panel">
     <div class="panel-heading">
       <span class="eyebrow">YOUR PARAMETERS</span
-      ><span aria-hidden="true">↘</span>
+      ><span aria-hidden="true"><svg class="compat-arrow" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 5 19 19M5 19h14V5"></path></svg></span>
     </div>
     <form [formGroup]="loanForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="field-number">01 <span>Start with your amount</span></div>
@@ -59,7 +59,7 @@
       /></mat-form-field>
       <p *ngIf="errorMessage" class="error" role="alert">{{ errorMessage }}</p>
       <button type="submit" class="calculate">
-        Calculate loan <span aria-hidden="true">↗</span>
+        Calculate loan <span aria-hidden="true"><svg class="compat-arrow" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"></path></svg></span>
       </button>
       <button
         type="button"
