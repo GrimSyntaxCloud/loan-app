@@ -23,7 +23,7 @@ jobs:
       - run: npm test
       - run: npm run build:pages
       - run: cp dist/loan-app/browser/index.html dist/loan-app/browser/404.html
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:
           path: dist/loan-app/browser
